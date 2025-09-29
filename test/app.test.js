@@ -1,10 +1,8 @@
-const request = require('supertest');
-const app = require('../index'); // now works because index.js is one folder up
+# tests/test_app.py
+from app import app
 
-describe('GET /', () => {
-  it('responds with JSON {ok: true}', async () => {
-    const res = await request(app).get('/');
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toEqual({ ok: true });
-  });
-});
+def test_index():
+    client = app.test_client()
+    resp = client.get("/")
+    assert resp.status_code == 200
+    assert resp.get_json() == {"status": "ok"}
