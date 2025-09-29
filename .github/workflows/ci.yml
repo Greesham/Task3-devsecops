@@ -1,4 +1,20 @@
-cd ..\..\  # back to project root
-git add .github/workflows/ci.yml
-git commit -m "Add GitHub Actions CI workflow"
-git push origin main
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Show working directory
+        run: pwd
+
+      - name: List files
+        run: ls -la
